@@ -16,8 +16,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Load and prepare data
-data = pd.read_csv('8_PySolve_Cleaned_Data.csv')
-df = data.copy()
+# Example: Split into two parts
+# df = pd.read_csv('8_PySolve_Cleaned_Data.csv')
+
+#splitting the file as too large to load on Github(this code to run only once. Now the file is split)
+#df.iloc[:len(df)//2].to_csv('part1.csv', index=False)
+#df.iloc[len(df)//2:].to_csv('part2.csv', index=False)
+
+#Now merge 
+df1 = pd.read_csv('part1.csv')
+df2 = pd.read_csv('part2.csv')
+df = pd.concat([df1, df2], ignore_index=True)
+
+#df = data.copy()
 
 # Drop duplicate patients for demographic summary
 demo = df.drop_duplicates(subset="patient_id")[[
